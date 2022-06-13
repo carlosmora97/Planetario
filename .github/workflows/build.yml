@@ -1,14 +1,13 @@
 name: Build
 on:
   push:
-    branches:
-      - master
+    branches: [ master ]
   pull_request:
-    types: [opened, synchronize, reopened]
+    branches: [ master ]
 jobs:
   build:
     name: Build
-    runs-on: windows-latest
+    runs-on: windows-2019
     steps:
       - name: Set up JDK 11
         uses: actions/setup-java@v1
@@ -43,5 +42,5 @@ jobs:
         shell: powershell
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"carlosmora97_Planetario" /o:"carlosmora97" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
-          Setup MSBuild
+          dotnet build --no-restore
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
