@@ -49,7 +49,7 @@ jobs:
         uses: Nuget/setup-nuget@v1.0.5
 
       - name: Restore nuget packages
-        run: nuget restore ./Planetario/Planetario.sln
+        run: nuget restore ./Planetario.sln
       
       - name: Build and analyze
         env:
